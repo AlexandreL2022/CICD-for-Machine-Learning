@@ -23,6 +23,13 @@ jobs:
         run: make format
       - name: Train
         run: make train
+      - name: Debug CML_TOKEN presence
+        run: |
+          if [ -z "${{ secrets.CML_TOKEN }}" ]; then
+            echo "CML_TOKEN is EMPTY"
+          else
+            echo "CML_TOKEN is SET"
+          fi
       - name: Evaluation
         env:
           REPO_TOKEN: ${{ secrets.CML_TOKEN }}
