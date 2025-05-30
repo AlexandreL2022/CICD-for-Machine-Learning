@@ -15,4 +15,4 @@ eval:
 	echo '\n## Confusion Matrix Plot' >> report.md
 	echo '![Confusion Matrix](./Results/model_results.png)' >> report.md
 	
-	cml comment create report.md
+	REPO_TOKEN=$(REPO_TOKEN) cml comment create report.md
