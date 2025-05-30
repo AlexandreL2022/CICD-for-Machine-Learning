@@ -7,7 +7,7 @@ on:
     branches: 
     - main
   workflow_dispatch:
-  
+
 permissions: write-all
 jobs:
   build:
@@ -15,6 +15,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: iterative/setup-cml@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.API_GITHUB_TOKEN }}
       - name: Install Packages
         run: make install
       - name: Format
