@@ -25,5 +25,5 @@ jobs:
         run: make train
       - name: Evaluation
         run: |
-          REPO_TOKEN=${{ secrets.CML_TOKEN }} make eval
+          GITHUB_TOKEN=${{ secrets.CML_TOKEN }} make eval
 
