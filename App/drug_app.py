@@ -1,11 +1,17 @@
 import gradio as gr
 import skops.io as sio
 
-pipe = sio.load("./Model/drug_pipeline.skops", trusted=True)
+# Get untrusted types from the file (for older skops versions)
+untrusted_types = sio.get_untrusted_types(file="./Model/drug_pipeline.skops")
+print("Untrusted types found:", untrusted_types)  # Review this output
+
+# If you trust these types, pass them to the loader
+pipe = sio.load("./Model/drug_pipeline.skops", trusted=untrusted_types)
 
 
 def predict_drug(age, sex, blood_pressure, cholesterol, na_to_k_ratio):
-    ""Predict drugs based on patient features.
+    """
+    Predict drugs based on patient features.
 
     Args:
         age (int): Age of patient
@@ -17,6 +23,7 @@ def predict_drug(age, sex, blood_pressure, cholesterol, na_to_k_ratio):
     Returns:
         str: Predicted drug label
     """
+
     features = [age, sex, blood_pressure, cholesterol, na_to_k_ratio]
     predicted_drug = pipe.predict([features])[0]
 
